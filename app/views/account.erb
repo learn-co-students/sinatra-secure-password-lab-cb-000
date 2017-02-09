@@ -1,5 +1,25 @@
 <h1>Welcome</h1>
+<h3>Your Account Balance: <%= @user.balance %></h3>
+<form method='POST' action='/deposit'>
+  <h4>Deposit</h4>
+  <p>
+    <label for='amount'>Amount: </label>
+    <input type='string' name='amount' id='amount'/>
+  </p>
+  <p>
+    <input type='submit' value='Deposit'/>
+  </p>
+</form>
+<form method='POST' action='/withdraw'>
+  <h4>Withdraw</h4>
+  <p>
+    <label for='amount'>Amount: </label>
+    <input type='string' name='amount' id='amount'/>
+  </p>
+  <p>
+    <input type='submit' value='Withdraw'/>
+  </p>
+</form>
 
-<p>We are currently working on your account.</p>
 
 <p><a href="/logout">Log Out</a></p>
