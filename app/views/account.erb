@@ -1,5 +1,7 @@
-<h1>Welcome</h1>
+<h1>Welcome, <%= current_user.username %>!</h1>
 
-<p>We are currently working on your account.</p>
+<p>We are currently working on your account, but your balance is $<%= sprintf("%.2f", current_user.balance) %></p>
 
-<p><a href="/logout">Log Out</a></p>
+<p>You can <a href="/deposit">make a deposit</a> or <a href="/withdrawal">make a withdrawal</a>!</p>
+
+<p>Or just <a href="/logout">Log Out</a> and carry on with your day.</p>

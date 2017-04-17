@@ -1,0 +1,9 @@
+<h2>Let's make a withdrawal!</h2>
+
+<h3>As a reminder, your balance is $<%= sprintf("%.2f", current_user.balance) %>.<br>
+How much would you like to withdraw? Must be numerical and less than your balance.</h3>
+
+<form action="/withdrawal" method="POST">
+  <input type="text" name="amount" placeholder="Amount:">
+  <input type="submit" value="Gimme!">
+</form>
