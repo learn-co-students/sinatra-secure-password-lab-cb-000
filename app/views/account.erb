@@ -1,5 +1,20 @@
 <h1>Welcome</h1>
+<h2><%= session.delete(:flash) %></h2>
 
 <p>We are currently working on your account.</p>
+
+<p>your balance is <%= user_account.balance %></p>
+
+<form class="" action="/account/withdraw" method="post">
+  <label>Amount to withdraw: <input type="text" name="amount"></label>
+  <input type="hidden" name="_method" value="PATCH">
+  <input type="submit">
+</form>
+
+<form class="" action="/account/deposit" method="post">
+  <label>Amount to deposit: <input type="text" name="amount"></label>
+  <input type="hidden" name="_method" value="PATCH">
+  <input type="submit">
+</form>
 
 <p><a href="/logout">Log Out</a></p>
