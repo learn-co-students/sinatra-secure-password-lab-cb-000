@@ -1,0 +1,83 @@
+D, [2017-07-19T21:05:04.670090 #760] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+App
+  GET '/'
+    returns a 200 status code
+  Signing Up
+    displays Sign Up Page
+    displays the failure page if no username is given (FAILED - 1)
+    displays the failure page if no password is given (FAILED - 2)
+    displays the log in page if username and password is given (FAILED - 3)
+  Logging In
+    displays Log In Page
+    displays the failure page if no username is given (FAILED - 4)
+    displays the failure page if no password is given (FAILED - 5)
+D, [2017-07-19T21:05:05.294589 #760] DEBUG -- :   [1m[35m (0.2ms)[0m  begin transaction
+D, [2017-07-19T21:05:05.299736 #760] DEBUG -- :   [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("username", "password_digest") VALUES (?, ?)[0m  [["username", "penelope"], ["password_digest", "$2a$10$JHescuA87mA9s5InrZk25.wXMAjNyUiZb0SMTz2qPfGFPnU8aNR4."]]
+D, [2017-07-19T21:05:05.303114 #760] DEBUG -- :   [1m[35m (2.9ms)[0m  commit transaction
+    displays the user's account page if username and password is given (FAILED - 6)
+  GET '/logout'
+    clears the session
+  User Model
+D, [2017-07-19T21:05:05.506037 #760] DEBUG -- :   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+D, [2017-07-19T21:05:05.507660 #760] DEBUG -- :   [1m[35mSQL (0.6ms)[0m  INSERT INTO "users" ("username", "password_digest") VALUES (?, ?)  [["username", "test123"], ["password_digest", "$2a$10$3.3Zj9RsYI1wkQbn6GDawu2UPV27Ttj7skotxa4dfCjS4TXFmIvP6"]]
+D, [2017-07-19T21:05:05.511303 #760] DEBUG -- :   [1m[36m (3.3ms)[0m  [1mcommit transaction[0m
+    responds to authenticate method from has_secure_password
+
+Failures:
+
+  1) App Signing Up displays the failure page if no username is given
+     Failure/Error: follow_redirect!
+
+     Rack::Test::Error:
+       Last response was not a redirect. Cannot follow_redirect!
+     # /usr/local/rvm/gems/ruby-2.3.1/gems/rack-test-0.6.3/lib/rack/test.rb:184:in `follow_redirect!'
+     # ./spec/secure_password_spec.rb:23:in `block (3 levels) in <top (required)>'
+
+  2) App Signing Up displays the failure page if no password is given
+     Failure/Error: follow_redirect!
+
+     Rack::Test::Error:
+       Last response was not a redirect. Cannot follow_redirect!
+     # /usr/local/rvm/gems/ruby-2.3.1/gems/rack-test-0.6.3/lib/rack/test.rb:184:in `follow_redirect!'
+     # ./spec/secure_password_spec.rb:29:in `block (3 levels) in <top (required)>'
+
+  3) App Signing Up displays the log in page if username and password is given
+     Failure/Error: follow_redirect!
+
+     Rack::Test::Error:
+       Last response was not a redirect. Cannot follow_redirect!
+     # /usr/local/rvm/gems/ruby-2.3.1/gems/rack-test-0.6.3/lib/rack/test.rb:184:in `follow_redirect!'
+     # ./spec/secure_password_spec.rb:35:in `block (3 levels) in <top (required)>'
+
+  4) App Logging In displays the failure page if no username is given
+     Failure/Error: expect(page.body).to include('Flatiron Bank Error')
+       expected "" to include "Flatiron Bank Error"
+     # ./spec/secure_password_spec.rb:53:in `block (3 levels) in <top (required)>'
+
+  5) App Logging In displays the failure page if no password is given
+     Failure/Error: expect(page.body).to include('Flatiron Bank Error')
+       expected "" to include "Flatiron Bank Error"
+     # ./spec/secure_password_spec.rb:62:in `block (3 levels) in <top (required)>'
+
+  6) App Logging In displays the user's account page if username and password is given
+     Failure/Error: expect(page.current_path).to eq('/account')
+
+       expected: "/account"
+            got: "/login"
+
+       (compared using ==)
+     # ./spec/secure_password_spec.rb:73:in `block (3 levels) in <top (required)>'
+
+Finished in 0.96882 seconds (files took 2.82 seconds to load)
+11 examples, 6 failures
+
+Failed examples:
+
+rspec ./spec/secure_password_spec.rb:21 # App Signing Up displays the failure page if no username is given
+rspec ./spec/secure_password_spec.rb:27 # App Signing Up displays the failure page if no password is given
+rspec ./spec/secure_password_spec.rb:33 # App Signing Up displays the log in page if username and password is given
+rspec ./spec/secure_password_spec.rb:48 # App Logging In displays the failure page if no username is given
+rspec ./spec/secure_password_spec.rb:57 # App Logging In displays the failure page if no password is given
+rspec ./spec/secure_password_spec.rb:67 # App Logging In displays the user's account page if username and password is given
+
