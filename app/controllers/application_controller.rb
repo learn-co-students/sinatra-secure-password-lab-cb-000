@@ -48,6 +48,24 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  post '/deposit' do
+    user = current_user
+    user.add_deposit(params[:deposit])
+    redirect '/account'
+  end
+
+
+
+  post '/withdraw' do
+    @user = current_user
+    if @user.withdrawal_valid?(params[:withdrawal])
+      @user.make_withdrawal(params[:withdrawal])
+      redirect '/account'
+    else
+      erb :insufficient
+    end
+  end
+
   get "/success" do
     if logged_in?
       erb :success

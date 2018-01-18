@@ -1,5 +1,19 @@
 <h1>Welcome</h1>
 
 <p>We are currently working on your account.</p>
+<h1>Hi <%= @user.username%> </h1>
+<h1>Your balance is: <%= @user.balance.to_s %> </h1>
+<h2>Make a Deposit</h2>
+<form action="/deposit" method="POST">
+  <input type="text" name="deposit" placeholder="Amount:"><br>
+  <input type="submit" value="Deposit">
+</form>
+
+<h2>Make a Withdrawal</h2>
+
+<form action="/withdraw" method="POST">
+  <input type="text" name="withdrawal" placeholder="Withdrawal Amount:">
+  <input type="submit" value="Withdraw">
+</form>
 
 <p><a href="/logout">Log Out</a></p>
