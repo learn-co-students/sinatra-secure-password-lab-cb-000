@@ -1,3 +1,4 @@
 class User < ActiveRecord::Base
-  validates_presence_of :username, :password
+  has_secure_password
+  validates_presence_of :username, :password_digest
 end
