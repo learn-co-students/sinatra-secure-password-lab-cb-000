@@ -2,7 +2,9 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
-gem 'activerecord'
+# fix problem with undefined method 'needs_migration'
+#gem 'activerecord', :require => 'active_record'
+gem 'activerecord', '~> 4.2', '>= 4.2.2'
 gem 'sinatra-activerecord'
 gem 'rake'
 gem 'bcrypt'
@@ -11,9 +13,9 @@ gem 'capybara'
 gem 'rack_session_access'
 gem 'rack-test'
 gem 'shotgun'
+gem 'pry'
 
 group :development do
-  gem 'pry'
   gem 'sqlite3'
   gem 'rspec'
   gem 'tux'
