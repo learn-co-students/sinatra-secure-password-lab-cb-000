@@ -23,13 +23,13 @@ class ApplicationController < Sinatra::Base
     #@user.password = params[:password]
     #if @user.save
     if params[:username].empty? || params[:password].empty?
-      redirect "/failure"
+      redirect :"/failure"
     else
       user = User.new
       user.username = params[:username]
       user.password = params[:password]
       user.save
-      redirect "/login"
+      redirect :"/login"
     end
   end
 
@@ -64,9 +64,9 @@ class ApplicationController < Sinatra::Base
     ##your code here
     login(params[:username], params[:password])
     if logged_in?
-      redirect "/account"
+      redirect :"/account"
     else
-      redirect "/failure"
+      redirect :"/failure"
     end
   end
 
@@ -76,7 +76,7 @@ class ApplicationController < Sinatra::Base
 
   get "/logout" do
     session.clear
-    redirect "/"
+    redirect :"/"
   end
 
   helpers do
