@@ -100,7 +100,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord (~> 4.2, >= 4.2.2)
+  activerecord (<= 5.1)
   bcrypt
   capybara
   pry
