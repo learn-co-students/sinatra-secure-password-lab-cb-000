@@ -20,12 +20,20 @@ class ApplicationController < Sinatra::Base
     input = ["username", "password"]
 
     input.each do |data|
+<<<<<<< HEAD
       if params[data.to_sym].match(/\s/) != nil || params[data.to_sym].empty?
+=======
+      if params[data.to_sym] == nil || params[data.to_sym].match(/\s/) != nil
+>>>>>>> 0c0aabeb9863fff6717bcda3241e58cec1a4c07c
         redirect '/failure'
         break
       end
     end
+<<<<<<< HEAD
     # password = BCrypt::Password.create(params[:password])
+=======
+
+>>>>>>> 0c0aabeb9863fff6717bcda3241e58cec1a4c07c
     @user = User.create(username: params[:username], password: params[:password])
 
     redirect '/login'
