@@ -17,12 +17,21 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-    #your code here
+    input = ["username", "password"]
 
+    input.each do |data|
+      if params[data.to_sym].match(/\s/) != nil || params[data.to_sym].empty?
+        redirect '/failure'
+        break
+      end
+    end
+    # password = BCrypt::Password.create(params[:password])
+    @user = User.create(username: params[:username], password: params[:password])
+
+    redirect '/login'
   end
 
   get '/account' do
-    @user = User.find(session[:user_id])
     erb :account
   end
 
@@ -32,7 +41,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/login" do
-    ##your code here
+    @user = User.find_by(username: params[:username]).try(:authenticate, params[:password]) 
+
+    if (@user == nil)
+      redirect '/failure'
+    else
+      session[:user_id] = @user.id
+      redirect '/account'
+    end
   end
 
   get "/failure" do
