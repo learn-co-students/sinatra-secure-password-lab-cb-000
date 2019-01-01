@@ -2,4 +2,26 @@
 
 <p>We are currently working on your account.</p>
 
+<p>Welcome <%= current_user.first_name %>. </p>
+<% @accounts.each do |account| %>
+<p>Your <%= account.account_type %> balance is $<%= account.balance %></p>
+<% end %>
+
+<p>Would you like to deposit, withdraw or transfer money?</p>
+<form method="GET" action="/deposit">
+  <input name="value" type="submit" value="Deposit">
+</form>
+
+<form method="GET" action="/withdraw">
+  <input name="withdraw" type="submit" value="Withdraw">
+</form>
+
+<form method="POST" action="/checking_to_savings">
+  <input name="c_to_s" type="submit" value="Transfer from Checking to Savings">
+</form>
+
+<form method="POST" action="/savings_to_checking">
+  <input name="s_to_c"type="submit" value="Transfer from Savings to Checking">
+</form>
+
 <p><a href="/logout">Log Out</a></p>

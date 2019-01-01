@@ -1,0 +1,7 @@
+<h2>Hello <%= current_user.first_name %>. How much would you like to deposit?</h2>
+<form method="POST" action="/deposit">
+<div>
+  <h3><label for="deposit_amount">$</label><input id="deposit_amount" type="text" name="deposit_amount"></h3>
+</div>
+<input type="submit" value="Submit">
+</form>

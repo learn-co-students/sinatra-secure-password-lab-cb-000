@@ -1,0 +1,7 @@
+<h1>Your withdrawal has been successful!</h1>
+<h2>You withdrew $<%= @amount %> from your checking account.</h2>
+<h2>Your new checking balance is $<%= @user_checking.balance %>.
+
+<form method="GET" action="/account">
+  <input type="submit" value="<<<<< Go Back To Account">
+</form>
