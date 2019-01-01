@@ -117,13 +117,56 @@ class ApplicationController < Sinatra::Base
   end
 
   # transfer from checking to savings
-
   get '/checking_to_savings' do
-    
+    @accounts = Account.where("user_id =?", current_user.id)
+
+    erb :checking_to_savings
   end
 
   post '/checking_to_savings' do
+    @amount = params[:amount].to_i
 
+    @user_checking = Account.find_by(account_type: "checking", user_id: current_user.id)
+    @user_savings = Account.find_by(account_type: "savings", user_id: current_user.id)
+
+    if @amount > @user_checking.balance || @amount == 0
+      @link = 'checking_to_savings'
+      erb :transfer_error
+    else
+      @user_checking.balance -= @amount
+      @user_savings.balance += @amount
+      @user_checking.save
+      @user_savings.save
+
+      erb :transfer_to_savings_success
+    end
+  end
+
+
+  # Transfer from savings to checking
+  get '/savings_to_checking' do
+    @accounts = Account.where("user_id =?", current_user.id)
+
+    erb :savings_to_checking
+  end
+
+  post '/savings_to_checking' do
+    @amount = params[:amount].to_i
+
+    @user_checking = Account.find_by(account_type: "checking", user_id: current_user.id)
+    @user_savings = Account.find_by(account_type: "savings", user_id: current_user.id)
+
+    if @amount > @user_savings.balance || @amount == 0
+      @link = '/savings_to_checking'
+      erb :transfer_error
+    else
+      @user_checking.balance += @amount
+      @user_savings.balance -= @amount
+      @user_checking.save
+      @user_savings.save
+
+      erb :transfer_to_checking_success
+    end
   end
 
   helpers do

@@ -1,0 +1,8 @@
+<h1>Your transfer has been successful!</h1>
+<h2>You transferred $<%= @amount %> in your checking account.</h2>
+<h2>Your new checking balance is $<%= @user_checking.balance %>.</h2>
+<h2>Your new savings balance is $<%= @user_savings.balance %>.</h2>
+
+<form method="GET" action="/account">
+  <input type="submit" value="<<<<< Go Back To Account">
+</form>

@@ -1,0 +1,10 @@
+<h2>Hello <%= current_user.first_name %>. How much would you like to transfer from checking to savings?</h2>
+<% @accounts.each do |account| %>
+<h3>Your <%= account.account_type %> balance is $<%= account.balance %></h3>
+<% end %>
+<form method="POST" action="/checking_to_savings">
+<div>
+  <h3><label for="c_to_s">$</label><input id="c_to_s" type="text" name="amount"></h3>
+</div>
+<input type="submit" value="Submit">
+</form>
