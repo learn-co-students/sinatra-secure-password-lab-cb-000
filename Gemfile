@@ -2,7 +2,7 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
-gem 'activerecord', '<=5.1', :require => 'active_record'
+gem 'activerecord', '~> 4.2.5', :require => 'active_record'
 gem 'sinatra-activerecord'
 gem 'rake'
 gem 'bcrypt'
@@ -14,7 +14,7 @@ gem 'shotgun'
 gem 'pry'
 
 group :development do
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.3.6'
   gem 'rspec'
   gem 'tux'
 end
