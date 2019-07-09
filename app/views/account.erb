@@ -1,5 +1,19 @@
-<h1>Welcome</h1>
-
-<p>We are currently working on your account.</p>
-
-<p><a href="/logout">Log Out</a></p>
+<% if logged_in? then %>
+  <h1>Welcome, <%=current_user.username%></h1>
+  <% if session[:wfail] then %>
+    <h2>Your balance in not enough! Please try again.</h2>
+    <% session[:wfail] = false %>
+  <% end %>
+  <h2>Your balance is: <%=current_user.balance%></h2>
+  <form method="post">
+    <label for="amount">Amount: </label>
+    <input type="number" required name="amount" min="0.01" value="0.00" step=".01">
+    <button type="submit" name="deposit" formaction="/account/edit">Deposit</button>
+    <button type="submit" name="withdrawal" formaction="/account/edit">Withdrawal</button>
+  </form>
+  <p><a href="/logout">Log Out</a></p>
+<% else %>
+  <h1>Login Error!</h1>
+  <p>There seems to be an error please <a href="/login">Log in</a> again.</p>
+<% end %>
+<noscript>We are currently working on your account.</noscript>
