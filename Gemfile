@@ -11,10 +11,11 @@ gem 'capybara'
 gem 'rack_session_access'
 gem 'rack-test'
 gem 'shotgun'
-gem 'pry'
 
 group :development do
-  gem 'sqlite3'
+  gem 'pry'
   gem 'rspec'
   gem 'tux'
+  gem 'sqlite3'
 end
+
