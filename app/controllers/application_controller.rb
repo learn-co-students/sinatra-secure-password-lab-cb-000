@@ -1,5 +1,8 @@
 require "./config/environment"
 require "./app/models/user"
+
+require "pry"
+
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -17,13 +20,34 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-    #your code here
-
+    unless params[:username].empty? || params[:password].empty?
+      user = User.new(username: params[:username], password: params[:password])
+      user.save
+      redirect "/login"
+    else 
+      redirect "/failure"
+    end
   end
 
   get '/account' do
     @user = User.find(session[:user_id])
     erb :account
+  end
+
+  patch "/account/withdraw" do
+    user = User.find_by_id(session[:user_id])
+    user.balance -= params[:withdraw_amount].to_f
+    user.save
+
+    redirect "/account"
+  end
+
+  patch "/account/deposit" do
+    user = User.find_by_id(session[:user_id])
+    user.balance += params[:deposit_amount].to_f
+    user.save
+
+    redirect "/account"
   end
 
 
@@ -32,7 +56,13 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/login" do
-    ##your code here
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect "/account"
+    else
+      redirect "/failure"
+    end
   end
 
   get "/failure" do
